@@ -1,0 +1,109 @@
+body {
+  font-family: "Roboto Serif", serif;
+  color: black;
+}
+
+h2,
+h3 {
+  font-weight: 500;
+  color: #0d6efd;
+}
+
+h5 {
+  font-weight: 400;
+}
+.container {
+  max-width: 50%;
+  margin: 35px 60px;
+  padding: 40px 0 40px 35px;
+  background: radial-gradient(
+    343px at 46.3% 47.5%,
+    rgb(242, 242, 242) 0%,
+    rgb(241, 241, 241) 72.9%
+  );
+  box-shadow: 6px 6px 15px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+}
+
+.current-date-time {
+  margin-top: 25px;
+}
+
+.current-data {
+  margin-top: 25px;
+  margin-bottom: 40px;
+}
+
+.current-data-icon {
+  font-size: 40px;
+}
+
+.current-data-center {
+  position: relative;
+  left: 140px;
+}
+
+.current-data-right {
+  margin-top: 10px;
+  position: relative;
+  left: 2px;
+}
+
+.card {
+  max-width: 75%;
+}
+
+.forecast {
+  text-align: center;
+}
+
+.day-forecast {
+  border: solid 1px #939aa9;
+  border-radius: 5px;
+  margin: 5px 5px 20px 5px;
+  padding: 0;
+  transition: all 200ms ease-in-out;
+}
+
+.day-forecast:hover {
+  background: radial-gradient(
+    343px at 46.3% 47.5%,
+    rgb(242, 242, 242) 0%,
+    rgb(241, 241, 241) 72.9%
+  );
+}
+
+.week-day {
+  color: #0d6efd;
+  font-weight: bold;
+}
+
+.weather-icon {
+  font-size: 25px;
+}
+
+.next-days {
+  font-weight: 500px;
+}
+
+.footer {
+  font-size: 14px;
+  position: relative;
+  left: 340px;
+  margin-top: 20px;
+}
+
+.author {
+  text-decoration: none;
+}
+
+#celsius-temperature,
+#fahrenheit-temperature {
+  color: black;
+  text-decoration: none;
+  font-size: 38px;
+}
+
+#city {
+  text-transform: capitalize;
+}
