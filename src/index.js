@@ -48,11 +48,20 @@ function showWeather(response) {
   document.querySelector("#temperature").innerHTML =
     Math.round(temperatureCelsius);
   document.querySelector("#weather-condition").innerHTML =
-    response.data.weather[0].main;
+    response.data.weather[0].description;
   document.querySelector("#weather-humidity").innerHTML =
     response.data.main.humidity;
   document.querySelector("#weather-wind").innerHTML = Math.round(
     response.data.wind.speed
+  );
+  let iconElement = document.querySelector("#icon");
+  iconElement.setAttribute(
+    "src",
+    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+  );
+  iconElement.setAttribute(
+    "alt",
+    `http://openweathermap.org/img/wn/${response.data.weather[0].description}@2x.png`
   );
 }
 

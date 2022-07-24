@@ -12,15 +12,16 @@ h3 {
 h5 {
   font-weight: 400;
 }
+
 .container {
   max-width: 50%;
   margin: 35px 60px;
   padding: 40px 0 40px 35px;
-  background: radial-gradient(
+  /* background: radial-gradient(
     343px at 46.3% 47.5%,
     rgb(242, 242, 242) 0%,
     rgb(241, 241, 241) 72.9%
-  );
+  ); */
   box-shadow: 6px 6px 15px rgba(0, 0, 0, 0.2);
   border-radius: 5px;
 }
@@ -105,4 +106,13 @@ h5 {
 
 #city {
   text-transform: capitalize;
+}
+
+#weather-condition:first-letter {
+  text-transform: capitalize;
+}
+
+#icon {
+  position: relative;
+  margin-top: -25px;
 }
