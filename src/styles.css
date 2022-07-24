@@ -97,11 +97,10 @@ h5 {
   text-decoration: none;
 }
 
-#celsius-temperature,
-#fahrenheit-temperature {
+.current-data-center .active {
   color: black;
+  cursor: default;
   text-decoration: none;
-  font-size: 38px;
 }
 
 #city {

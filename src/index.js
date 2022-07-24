@@ -44,9 +44,9 @@ function formatDate(now) {
 // show weather block
 function showWeather(response) {
   document.querySelector("#city").innerHTML = response.data.name;
-  document.querySelector("#temperature").innerHTML = Math.round(
-    response.data.main.temp
-  );
+  temperatureCelsius = response.data.main.temp;
+  document.querySelector("#temperature").innerHTML =
+    Math.round(temperatureCelsius);
   document.querySelector("#weather-condition").innerHTML =
     response.data.weather[0].main;
   document.querySelector("#weather-humidity").innerHTML =
@@ -86,19 +86,25 @@ function getCurrentLocation(event) {
 }
 
 // temperature conversion block
-// function linkCelsius(event) {
-//   event.preventDefault();
-//   let temperatureElement = document.querySelector("#temperature");
-//   temperatureElement.innerHTML = 24;
-// }
 function linkFahrenheit(event) {
   event.preventDefault();
+  celsiusTemp.classList.remove("active");
+  fahrenheitTemp.classList.add("active");
   let temperatureElement = document.querySelector("#temperature");
-  let temperature = temperatureElement.innerHTML;
-  temperature = Number(temperature);
-  temperatureElement.innerHTML = Math.round(temperature * 1.8 + 32);
+  let temperatureFahrenheit = Math.round(temperatureCelsius * 1.8 + 32);
+  temperatureFahrenheit = Number(temperatureFahrenheit);
+  temperatureElement.innerHTML = temperatureFahrenheit;
 }
 
+function linkCelsius(event) {
+  event.preventDefault();
+  fahrenheitTemp.classList.remove("active");
+  celsiusTemp.classList.add("active");
+  let temperatureElement = document.querySelector("#temperature");
+  temperatureElement.innerHTML = Math.round(temperatureCelsius);
+}
+
+let temperatureCelsius = null;
 let currentDate = document.querySelector("#current-date-time");
 let now = new Date();
 currentDate.innerHTML = formatDate(now);
@@ -106,13 +112,13 @@ currentDate.innerHTML = formatDate(now);
 let formSearch = document.querySelector("#form-search");
 formSearch.addEventListener("submit", formSearchCity);
 
-// let celsiusTemp = document.querySelector("#celsius-temperature");
-// celsiusTemp.addEventListener("click", linkCelsius);
+let currentPosition = document.querySelector("#current-position");
+currentPosition.addEventListener("click", getCurrentLocation);
+
+let celsiusTemp = document.querySelector("#celsius-temperature");
+celsiusTemp.addEventListener("click", linkCelsius);
 
 let fahrenheitTemp = document.querySelector("#fahrenheit-temperature");
 fahrenheitTemp.addEventListener("click", linkFahrenheit);
-
-let currentPosition = document.querySelector("#current-position");
-currentPosition.addEventListener("click", getCurrentLocation);
 
 searchCity("Vinnytsia");
