@@ -41,6 +41,51 @@ function formatDate(now) {
   return `${currentDay}, ${currentDate} ${currentMonth} ${currentHour}:${currentMinutes}`;
 }
 
+function formatDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  return days[day];
+}
+
+function displayForecast(response) {
+  let forecast = response.data.daily;
+  let forecastElement = document.querySelector("#forecast");
+  let forecastHTML = `<div class="row weather-forecast">`;
+  forecast.forEach(function (forecastDay, index) {
+    if (index < 5) {
+      forecastHTML =
+        forecastHTML +
+        `
+            <div class="col-sm day-forecast">
+              <div class="week-day">${formatDay(forecastDay.dt)}</div>
+              <div class="temperature-forecast">
+                <span class="temperature-forecast-max">${Math.round(
+                  forecastDay.temp.max
+                )}°</span>/<span
+                  class="temperature-forecast-min"
+                  >${Math.round(forecastDay.temp.min)}°</span
+                >
+              </div>
+              <img src="http://openweathermap.org/img/wn/${
+                forecastDay.weather[0].icon
+              }@2x.png" alt="" width=70/>
+            </div>
+
+            `;
+    }
+  });
+
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
+}
+
+function getForecast(coordinates) {
+  let apiKey = "9a904f43cb3ef282a2ff5a4b8504f12f";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(displayForecast);
+}
+
 // show weather block
 function showWeather(response) {
   document.querySelector("#city").innerHTML = response.data.name;
@@ -63,6 +108,8 @@ function showWeather(response) {
     "alt",
     `http://openweathermap.org/img/wn/${response.data.weather[0].description}@2x.png`
   );
+
+  getForecast(response.data.coord);
 }
 
 // search city block + getCurrentPosition
@@ -114,6 +161,7 @@ function linkCelsius(event) {
 }
 
 let temperatureCelsius = null;
+
 let currentDate = document.querySelector("#current-date-time");
 let now = new Date();
 currentDate.innerHTML = formatDate(now);
