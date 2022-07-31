@@ -48,22 +48,25 @@ function formatDay(timestamp) {
   return days[day];
 }
 
+// forecast block
 function displayForecast(response) {
   let forecast = response.data.daily;
   let forecastElement = document.querySelector("#forecast");
   let forecastHTML = `<div class="row weather-forecast">`;
   forecast.forEach(function (forecastDay, index) {
     if (index < 5) {
+      forecastCelciusTempMax[index] = forecastDay.temp.max;
+      forecastCelciusTempMin[index] = forecastDay.temp.min;
       forecastHTML =
         forecastHTML +
         `
             <div class="col-sm day-forecast">
               <div class="week-day">${formatDay(forecastDay.dt)}</div>
               <div class="temperature-forecast">
-                <span class="temperature-forecast-max">${Math.round(
-                  forecastDay.temp.max
-                )}°</span>/<span
-                  class="temperature-forecast-min"
+                <span class="temperature-forecast-max" id="forecastTempMax${index}">${Math.round(
+          forecastDay.temp.max
+        )}°</span>/<span
+                  class="temperature-forecast-min" id="forecastTempMin${index}"
                   >${Math.round(forecastDay.temp.min)}°</span
                 >
               </div>
@@ -150,6 +153,18 @@ function linkFahrenheit(event) {
   let temperatureFahrenheit = Math.round(temperatureCelsius * 1.8 + 32);
   temperatureFahrenheit = Number(temperatureFahrenheit);
   temperatureElement.innerHTML = temperatureFahrenheit;
+
+  forecastCelciusTempMax.forEach(function (celcTemp, index) {
+    document.querySelector(`#forecastTempMax${index}`).innerHTML = Math.round(
+      celcTemp * 1.8 + 32
+    );
+  });
+
+  forecastCelciusTempMin.forEach(function (celcTemp, index) {
+    document.querySelector(`#forecastTempMin${index}`).innerHTML = Math.round(
+      celcTemp * 1.8 + 32
+    );
+  });
 }
 
 function linkCelsius(event) {
@@ -158,9 +173,21 @@ function linkCelsius(event) {
   celsiusTemp.classList.add("active");
   let temperatureElement = document.querySelector("#temperature");
   temperatureElement.innerHTML = Math.round(temperatureCelsius);
+
+  forecastCelciusTempMax.forEach(function (celcTemp, index) {
+    document.querySelector(`#forecastTempMax${index}`).innerHTML =
+      Math.round(celcTemp);
+  });
+
+  forecastCelciusTempMin.forEach(function (celcTemp, index) {
+    document.querySelector(`#forecastTempMin${index}`).innerHTML =
+      Math.round(celcTemp);
+  });
 }
 
 let temperatureCelsius = null;
+let forecastCelciusTempMax = [];
+let forecastCelciusTempMin = [];
 
 let currentDate = document.querySelector("#current-date-time");
 let now = new Date();
