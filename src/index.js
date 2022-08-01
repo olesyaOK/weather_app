@@ -124,6 +124,8 @@ function searchCity(city) {
 
 function formSearchCity(event) {
   event.preventDefault();
+  fahrenheitTemp.classList.remove("active");
+  celsiusTemp.classList.add("active");
   let city = document.querySelector("#form-search-city").value.trim();
   if (city.length === 0) {
     alert(`Please enter the city`);
@@ -142,6 +144,8 @@ function showPosition(position) {
 function getCurrentLocation(event) {
   event.preventDefault();
   navigator.geolocation.getCurrentPosition(showPosition);
+  fahrenheitTemp.classList.remove("active");
+  celsiusTemp.classList.add("active");
 }
 
 // temperature conversion block
